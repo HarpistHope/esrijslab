@@ -13,23 +13,36 @@
 <!-- add require statement to call modules necessary for full screen map app -->
   <script>  
 
-      require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {   
+      require([
+        "esri/config", 
+        "esri/Map", 
+        "esri/views/MapView",
+        "esri/widgets/BasemapGallery"
+      ], function(esriConfig, Map, MapView, BasemapGallery) {   
       
         // set API key and create map with basemap layer
         esriConfig.apiKey = "AAPTaZ2rQpZ3e_kAjLMbAoRHR0g.._fqqp4bDNHHZdzTSsp9AO-QkJHtKqpaj-7Xv25F1YGAftgihPfF0YtKx3TlgjV1fIfgz5d5KD1tO1WludBUUE8UK14qZyasG6wdcyVgej-0RvTJlT6Cqr8NSnHJs2CR-QKtZ6cx1a-DlDQQytvHfcbHYyH2--XMqzLkkWez9t3HIMhqczJVoVTeXmERX-Sc_6OCF9zTuUnAuesDvugrzl5GUAN3LGTz2Zteo1pZkcrVPu2RRO94cFDhn8pvWIVGFeUSd7-icAT1_FDhHahp4";
         const map = new Map({ 
-          basemap: "arcgis-community" // Basemap layer service 
+          basemap: "osm-style-relief" // Basemap layer service 
         });
 
         // create map view, set center and zoom level, set container property to viewDiv
         const view = new MapView({
           map: map,
-          center: [140.7291, 41.80], // Longitude, latitude - centered on Hakodate, Japan
-          container: "viewDiv" // Div element
+          center: [140.73, 41.80], // Longitude, latitude - centered on Hakodate, Japan
+          container: "viewDiv", // Div element
+          scale: 75000
         });
 
-        // set the scale of the map view (this should show the area around Hakodate, Japan)
-        view.scale = 80000
+
+        // add basemap gallery widget to the map view
+        const basemapGallery = new BasemapGallery({
+          view: view
+        });
+        // Add widget to the top right corner of the view
+        view.ui.add(basemapGallery, {
+          position: "top-right"
+        });
       });  
 
   </script>
