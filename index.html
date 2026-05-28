@@ -17,8 +17,9 @@
         "esri/config", 
         "esri/Map", 
         "esri/views/MapView",
-        "esri/widgets/BasemapGallery"
-      ], function(esriConfig, Map, MapView, BasemapGallery) {   
+        "esri/widgets/BasemapGallery",
+        "esri/widgets/Locate"
+      ], function(esriConfig, Map, MapView, BasemapGallery, Locate) {   
       
         // set API key and create map with basemap layer
         esriConfig.apiKey = "AAPTaZ2rQpZ3e_kAjLMbAoRHR0g.._fqqp4bDNHHZdzTSsp9AO-QkJHtKqpaj-7Xv25F1YGAftgihPfF0YtKx3TlgjV1fIfgz5d5KD1tO1WludBUUE8UK14qZyasG6wdcyVgej-0RvTJlT6Cqr8NSnHJs2CR-QKtZ6cx1a-DlDQQytvHfcbHYyH2--XMqzLkkWez9t3HIMhqczJVoVTeXmERX-Sc_6OCF9zTuUnAuesDvugrzl5GUAN3LGTz2Zteo1pZkcrVPu2RRO94cFDhn8pvWIVGFeUSd7-icAT1_FDhHahp4";
@@ -29,13 +30,13 @@
         // create map view, set center and zoom level, set container property to viewDiv
         const view = new MapView({
           map: map,
-          center: [140.73, 41.80], // Longitude, latitude - centered on Hakodate, Japan
+          center: [140.75, 41.80], // Longitude, latitude - centered on Hakodate, Japan
           container: "viewDiv", // Div element
-          scale: 75000 // scale level
+          scale: 70000 // scale level
         });
 
 
-        // add basic basemap gallery widget to the map view
+        // create basic basemap gallery widget
         const basemapGallery = new BasemapGallery({
           view: view
         });
@@ -43,6 +44,16 @@
         view.ui.add(basemapGallery, {
           position: "top-right"
         });
+
+        // create locate widget 
+        const locateWidget = new Locate({
+          view: view
+        });
+        // add locate widget to the top left corner of the view
+        view.ui.add(locateWidget, {
+          position: "top-left"
+        });
+
       });  
 
   </script>
